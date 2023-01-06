@@ -1,0 +1,87 @@
+debugger
+*, *::before, *::after { /* all before here is going is creating a pseudo element that targets the first children of the selected element wich in this case is all, same thing with after except is targets last children of selected element.   */
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif; /*settings all fonts to times new Roman*/
+}
+:root { /*!using HSL colors!*/
+  --hue-neutral:200; /* setting hue to "neutral" which will be the neither correct nor wrong color, before a answer is selected*/
+  --hue-wrong:0; /*setting hue for wrong answers, as RED*/
+  --hue-correct:145;/*setting hue for correct answerse*/
+}
+
+
+
+body {
+  --hue: var(--hue-neutral); /* defining hue variable here and by defualt its set to neutral IE when a question is not yet answered*/
+  padding:0; 
+  margin:0;
+  display: flex;
+  width: 100vw; /* 100 viewwidth scales with current window resolution*/
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color:hsl(var(--hue), 100%, 20%);
+}
+
+body.correct {
+  --hue:var(--hue-correct); /*setting class for correct background which is green so its easy to switch to later in the js, same things with the wrong hue except its red.*/
+}
+
+body.wrong{
+  --hue:var(--hue-wrong);
+}
+
+.container{
+  width:800px; /*making height 800px at all times to scale correctly*/
+  max-width:80%; /*making content 80% of page width at all times so its not touching the sides*/
+  background-color: grey;
+  border-radius: 5px; /*rounding edges*/
+  padding: 10px;
+  box-shadow: 0 0 10px 2px; /*x and y offset respectively set to 0 so its the same all around the box and blur set to 10px(how strong thr blur is) and 2px of reach.*/
+}
+
+.btn-grid{
+  display:grid;
+  grid-template-columns: repeat(2,auto); /* setting to column and 2 assetes per row and scalling and number of rows set to auto*/
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn {
+  --hue:var(--hue-neutral);
+  border: 1px solid hsl(var(--hue),100%, 30%); /*setting border to be a clean 1px and setting the saturation a bit lighter*/
+  background-color: hsl(var(--hue),100%, 50%); /*100%opacity and 50% saturation on the background of all the buttons in class .btn*/
+  border-radius: 5px; /*rounding edges*/
+  padding: 5px 10px;
+  color:lightgray;
+  outline:none;
+}
+
+.btn:hover { /* whenever hovering over a button in class .btn*/
+  border-color: greenyellow;
+}
+
+.btn.correct {
+  --hue:var(--hue-correct);
+  color:black; /*it was hard to read the grey on the green so changing this to black text when the button turns green */
+}
+
+.btn.wrong { /* setting the color of the buttons when they are either wrong or right so we can set the buttons to these later in the js*/
+  --hue:var(--hue-wrong)
+}
+
+.start-btn, .next-btn{ /*making start and next buttons look different than the other buttons but similar to each other*/
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding:10px 15px;
+}
+
+.controls { /*for controller buttons*/
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide { /*everything except start button and anything else i want to add should be hidden when loading the page*/
+  display: none;
+}

@@ -4,39 +4,36 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/reset.css"> <!--reset sheet to reset chrome default css settings.-->
   <link rel="stylesheet" href="./assets/style.css">
-  <title>Homework Quiz!</title>
+  <script defer src="./assets/main.js"></script> <!-- we were taught to put js link at the bottom of code so it loads after html and css but, defer will make it load after anyway and now I can have all of the links on the top in one space.-->
+  <title>Quiz App</title>
 </head>
 <body>
-  <div>
-    <h2>Welcome</h2>
+  <!--    <h2>Welcome</h2>
     <p>heres a small quiz you can take to test your full stack knowledge</p>
   </div>
   <button>
     <p class="startQButt">start quiz</p>
-  </button>
+  </button>-->
 
-
-
-  <div class="quizCont"> <!-- quizCont: quiz container to hold quiz questions and answer buttons-->
-    <div id="questCont" class="hide"> <!--questCont: question(s) container, container to hold questions, comes before anything else so its the "defualt" 
+  <div class="container"> <!-- quizCont: quiz container to hold quiz questions and answer buttons-->
+    <div id="question-container" class="hide"> <!--questCont: question(s) container, container to hold questions, comes before anything else so its the "defualt" 
       thing were looking at when in the quiz itself, this way we can switch to a different screen/ or add things like the question was not aswered 
       correctly after the answer for the question is selected. also a class of hide, so it is hidden when the page is loaded and then we can un-hide it when the quiz is started -->
-      <div class="controller"> <!-- general class for buttons that control what we are doing with the page, start button starts the quiz, and next button will set next question to screen and hide previous question -->
-        <button id="start-butt" class="start-butt butt">START</button> <!--start button with an id and class so we can throw a button class on and then subsequently its own style so its styled how i want the start button to be styled.-->
-        <button id="next-butt" class="next-butt butt hide"></button> <!-- same thing here except we will keep it hidden until quiz quiestions are answered-->
+      <div id="question">Question</div> <!--question for the quiz content-->
+      <div id="answer-buttons" class="btn-grid"><!-- answer buttons container to contain all answers with buttons inside a grid-->
+        <button class="btn">Answer 1</button>
+        <button class="btn">Answer 2</button> <!-- actual quiz answers buttons-->
+        <button class="btn">Answer 3</button>
+        <button class="btn">Answer 4</button>
       </div>
-
-
+    </div>
+    <div class="controls"> <!-- general class for buttons that control what we are doing with the page, start button starts the quiz, and next button will set next question to screen and hide previous question -->
+      <button id="start-btn" class="start-btn btn">START</button> <!--start button with an id and class so we can throw a button class on and then subsequently its own style so its styled how i want the start button to be styled.-->
+      <button id="next-btn" class="next-btn btn hide">NEXT</button> <!-- same thing here except we will keep it hidden until quiz quiestions are answered-->
     </div>
   </div>
 
 
-
-
-
-
-  <script src="./assets/main.js"></script>
 </body>
 </html>
