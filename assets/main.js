@@ -11,6 +11,10 @@ let shuffledQuestions, currentQuestionIndex
 
 
 startButton.addEventListener('click', startGame); // listening when startButton is clicked and when it is we call startGame
+nextButton.addEventListener('click',() =>{
+  currentQuestionIndex++; // move current question index up one when next button is clicked and then set the next question with setnextquestion.
+  setNextQuestion();
+} )
 
 
 function startGame(){
@@ -46,6 +50,7 @@ function showQuestion(question){
 
 
 function resetState(){
+  clearStatusClass(document.body); // reset the body background color to neutral when a answer for a question has not been selected.
   clearStatusClass(document.body);
   nextButton.classList.add('hide'); // hiding next button until we click on an answer\
   while(answerButtonsElement.firstChild){// essential while, in answerButtonsElement if there is any first child inside of the answer button element
@@ -63,20 +68,27 @@ function selectAnswer(e) { // taking e(event) in as para
   Array.from(answerButtonsElement.children).forEach(button => {
     setStatusClass(button, button.dataset.correct); // setting the status of the button weather or not the status of the button is correct or not 
   })
+  if(shuffledQuestions.length > currentQuestionIndex + 1){ // if we arent on the last question then we will show the next button otherwise the next button will not show. the next button return throws an error if there isnt any questions left.
+  nextButton.classList.remove('hide'); // remove hide class from next button when select answer is called, or when the answer for the question is chosen.
+  }
+  else {
+    startButton.innerText = 'Restart?'; // when we finish the last question instead of making an entire new restart button we can just reuse the start button and simply rename the text inside to restart. and when clicked the quiz will start over again in a new order
+    startButton.classList.remove('hide'); // showing the restart or (start) button when done with the last question
+  }
 }
 
 
 function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
-    element.classList.add('correct')
+    element.classList.add('correct') // when the element(answer/choice box) results to being correct when clicked on we set the css class to correct and subsequently the wrest of them to wrong class
   } else {
     element.classList.add('wrong')
   }
 }
 
 function clearStatusClass(element) {
-  element.classList.remove('correct')
+  element.classList.remove('correct') // when moving to the next question we set the question boxes to neither correct or wrong to default to neutral class.
   element.classList.remove('wrong')
 }
 
