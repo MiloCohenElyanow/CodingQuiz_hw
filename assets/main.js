@@ -8,19 +8,25 @@ const timer = document.getElementById('timer');
 
 let timerInt = 5;
 
+let currScore = 0;
+
 let shuffledQuestions, currentQuestionIndex
 
-var timerstart = setInterval(timerWrite, 1000);
+
+function timerAll(){
+  var timerstart = setInterval(timerWrite, 1000); // every 1 second call timerwrite
 
 let l = 61
 function timerWrite(){
-  l--;
-  timer.textContent = l;
+  l--; // l-- to have 61 go down by 1 every 1 second
+  timer.textContent = l; // writing l to the html do display the timer number
 
-  if (l < 1){
+  if (l < 1){ // if l is less than 0 clear the timer interval
     clearInterval(timerstart);
+    timer.textContent = "OUT OF TIME";
   }
 
+}
 }
 
 
@@ -60,7 +66,7 @@ function startQ(){
   currentQuestionIndex = 0; // setting index to 0 to start at the top after sorting
   questionContainerElement.classList.remove('hide'); // removing hide class from question container when user starts game
   timer.classList.remove('hide'); // removing hide element when quiz starts
-  /*timerAll();// calling timer when we remove hide from it, kind of starting the timer when its un-hidden */
+  timerAll();// calling timer when we remove hide from it, kind of starting the timer when its un-hidden 
   NextQues(); // calling function setnextquestion which will set the next question to the screen from a array of objects that hold the questions and answers
 
 }
@@ -101,6 +107,10 @@ function pickAnsw(e) { // taking e(event) in as para
   const correct = selectedButton.dataset.correct // getting the 'correct' data set that is true since it defualts to evaluating that way.
   setQType(document.body, correct); // selecting the body and telling it weather it should be set to correct or wrong.
   // need to convert the live objects and datasets into an array, and running that for and through each of the buttons
+  if (selectedButton.dataset.correct){
+    currScore += 1
+    console.log("current score after correct update: ", currScore);
+  }
   Array.from(answerButtonsElement.children).forEach(button => {
     setQType(button, button.dataset.correct); // setting the status of the button weather or not the status of the button is correct or not 
   })
@@ -117,7 +127,7 @@ function pickAnsw(e) { // taking e(event) in as para
 function setQType(element, correct) {
   clearQField(element)
   if (correct) {
-    element.classList.add('correct') // when the element(answer/choice box) results to being correct when clicked on we set the css class to correct and subsequently the wrest of them to wrong class
+    element.classList.add('correct') // when the element(answer/choice box) results to being correct when clicked on we set the css class to correct and subsequently the wrest of them to wrong class 
   } else {
     element.classList.add('wrong')
   }
@@ -127,6 +137,7 @@ function clearQField(element) {
   element.classList.remove('correct') // when moving to the next question we set the question boxes to neither correct or wrong to default to neutral class.
   element.classList.remove('wrong')
 }
+
 
 const questions = [ // questions is an array with objects, question is an element of an object ,answers is an array of objects, and those objects have 2 keywords with values, the questions with the content of the question and the value of correct to determine weather it is correct or not. 
   {
@@ -150,7 +161,7 @@ const questions = [ // questions is an array with objects, question is an elemen
   {
     question: 'what is 2*3?',
     answers: [
-      {text: 'at least 4', correct: true},
+      {text: 'at least 4', correct: false},
       {text: 'your mom', correct: false},
       {text: '6', correct:true},
       {text: '21...', correct:false},
@@ -187,18 +198,18 @@ const questions = [ // questions is an array with objects, question is an elemen
     question: 'What is the best coding langauge, obviously un-biased',
     answers: [
       {text: 'Python', correct: true},
-      {text: 'HTML,CSS,JS', correct: true},
-      {text: 'C++,C#', correct:true},
-      {text: 'Ruby, Django', correct:true},
+      {text: 'HTML,CSS,JS', correct: false},
+      {text: 'C++,C#', correct:false},
+      {text: 'Ruby, Django', correct:false},
     ]
   },
   {
     question: 'If you were president what is the first thing you would HAVE to do',
     answers: [
-      {text: 'Commit a Capitol crime, then pardon yourself', correct: true},
+      {text: 'Commit a Capitol crime, then pardon yourself', correct: false},
       {text: 'Trash the whitehouse with a epic party', correct: true},
       {text: 'Fill out paper work, because you just became president', correct:false},
-      {text: 'Tell your vice president your going on a 4 year vacation', correct:true},
+      {text: 'Tell your vice president your going on a 4 year vacation', correct:false},
     ]
   },
   {
@@ -207,7 +218,7 @@ const questions = [ // questions is an array with objects, question is an elemen
       {text: 'HULU', correct: false},
       {text: 'TWITCH', correct: true},
       {text: 'NETFLIX', correct:false},
-      {text: 'YOUTUBE', correct:true},
+      {text: 'YOUTUBE', correct:false},
     ]
   },
   {
@@ -222,7 +233,7 @@ const questions = [ // questions is an array with objects, question is an elemen
   {
     question: 'what is the most popular rythm game ever made',
     answers: [
-      {text: 'OSU!', correct: true},
+      {text: 'OSU!', correct: false},
       {text: 'Beat Saber', correct: false},
       {text: 'Guitar Hero', correct:true},
       {text: 'Friday Night Funkin', correct:false},
@@ -250,8 +261,8 @@ const questions = [ // questions is an array with objects, question is an elemen
     question: 'What is bootstrap?',
     answers: [
       {text: 'A free open source css framework directed at mobile-first front end webdevelopement, containing templates, typography, buttons, navigation, and so much more', correct: true},
-      {text: 'ur mom lol', correct: true},
-      {text: 'Fortnight Battlepass', correct:true},
+      {text: 'ur mom lol', correct: false},
+      {text: 'Fortnight Battlepass', correct:false},
       {text: 'something from Ohio', correct:false},
     ]
   },

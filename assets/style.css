@@ -50,7 +50,11 @@ body.wrong{
   top: 0;
   right: 0;
   font-size: 20px;
-
+}
+#score{
+  position: absolute;
+  top: 0;
+  left:0;
 }
 
 .btn-grid{
