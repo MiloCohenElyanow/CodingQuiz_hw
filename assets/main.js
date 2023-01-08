@@ -6,8 +6,12 @@ const questionElement = document.getElementById('question'); // initializing the
 const answerButtonsElement = document.getElementById('answer-buttons'); // init answer-buttons as answerButtonsElement for writing the actual text to the buttons, in this case we need to grab the container and then can 'bubble down' the answers since they both exist in chronilogical order.
 const timer = document.getElementById('timer');
 const score = document.getElementById("score");
+
+//curr-work
 const saveName = document.getElementById('saveName');
 const saveNameButton = document.getElementById("saveNameButton");
+const failScreen = document.getElementById("fail-screen");
+const displayScores = document.getElementById("dispScores");
 
 
 
@@ -24,9 +28,9 @@ let l = 61;
 function timerAll(){
   var timerstart = setInterval(timerWrite, 1000); // every 1 second call timerwrite
 
-function timerWrite(){
+  function timerWrite(){
   l--; // l-- to have 61 go down by 1 every 1 second
-  timer.textContent = l; // writing l to the html do display the timer number
+  timer.textContent = ("TIME: "+ l); // writing l to the html do display the timer number
 
   if (l < 1){ // if l is less than 0 clear the timer interval
     clearInterval(timerstart);
@@ -134,6 +138,7 @@ function pickAnsw(e) { // taking e(event) in as para
   else {
     startButton.innerText = 'Restart?'; // when we finish the last question instead of making an entire new restart button we can just reuse the start button and simply rename the text inside to restart. and when clicked the quiz will start over again in a new order
     startButton.classList.remove('hide'); // showing the restart or (start) button when done with the last question
+    endScreen(); // go to end screen afting re adding restart button
   }
 }
 
@@ -150,6 +155,16 @@ function setQType(element, correct) {
 function clearQField(element) {
   element.classList.remove('correct') // when moving to the next question we set the question boxes to neither correct or wrong to default to neutral class.
   element.classList.remove('wrong')
+}
+
+function endScreen(){
+  console.log("went to end screen");
+  afterTimer(); // stop timer when its not needed at end
+  failScreen.classList.remove("hide"); // removing hide from score form to show it
+  displayScores.classList.remove("hide");//same here as above
+  questionContainerElement.classList.add("hide"); // add hide to quiz container to remove it
+
+
 }
 
 

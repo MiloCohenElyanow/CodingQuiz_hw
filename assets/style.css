@@ -1,4 +1,3 @@
-debugger
 *, *::before, *::after { /* all before here is going is creating a pseudo element that targets the first children of the selected element wich in this case is all, same thing with after except is targets last children of selected element.   */
   box-sizing: border-box;
   font-family: 'Times New Roman', Times, serif; /*settings all fonts to times new Roman*/
