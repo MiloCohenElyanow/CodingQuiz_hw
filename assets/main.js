@@ -153,12 +153,9 @@ function clearQField(element) {
 }
 
 function endScreen(player_Score){
-  console.log("attempting to clear interval");
+  console.log("went to end screen");
   clearInterval(timerstart);
   timer.textContent = "OUT OF TIME";
-  element.classList.remove('correct');
-  element.classList.remove('wrong');
-  console.log("went to end screen");
   failScreen.classList.remove("hide"); // removing hide from score form to show it
   displayScores.classList.remove("hide");//same here as above
   questionContainerElement.classList.add("hide"); // add hide to quiz container to remove it
