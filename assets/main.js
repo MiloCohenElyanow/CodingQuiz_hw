@@ -8,13 +8,17 @@ const timer = document.getElementById('timer');
 const score = document.getElementById("score");
 
 //curr-work
-const saveName = document.getElementById('saveName');
+let saveNameInput = document.getElementById("saveNameInput");
+let saveNameField = document.getElementById('saveName');
 const saveNameButton = document.getElementById("saveNameButton");
 const failScreen = document.getElementById("fail-screen");
 const displayScores = document.getElementById("dispScores");
 
 
+saveNameButton.addEventListener('click', saveName);
 
+
+let player_Score;
 
 let timerInt = 5;
 
@@ -24,28 +28,19 @@ let shuffledQuestions, currentQuestionIndex;
 
 let l = 61;
 
+var timerstart;
 
 function timerAll(){
-  var timerstart = setInterval(timerWrite, 1000); // every 1 second call timerwrite
-
-  function timerWrite(){
-  l--; // l-- to have 61 go down by 1 every 1 second
-  timer.textContent = ("TIME: "+ l); // writing l to the html do display the timer number
-
-  if (l < 1){ // if l is less than 0 clear the timer interval
-    clearInterval(timerstart);
-    timer.textContent = "OUT OF TIME";
-  }
-}
-}
-
-
-
-function startTimer(){
-  var timerInt = setInterval(writeTimer, 1000);
-  if(timerInt == 0){
-    clearInterval(timerInt);
-  }
+  timerstart = setInterval(() => {
+      l--; // l-- to have 61 go down by 1 every 1 second
+      timer.textContent = ("TIME: "+ l); // writing l to the html do display the timer number
+    
+      if (l < 1){ // if l is less than 0 clear the timer interval
+        clearInterval(timerstart);
+        timer.textContent = "OUT OF TIME";
+        endScreen();
+      }
+  }, 1000); // every 1 second call timerwrite
 }
 
 function writeTimer(){
@@ -138,7 +133,7 @@ function pickAnsw(e) { // taking e(event) in as para
   else {
     startButton.innerText = 'Restart?'; // when we finish the last question instead of making an entire new restart button we can just reuse the start button and simply rename the text inside to restart. and when clicked the quiz will start over again in a new order
     startButton.classList.remove('hide'); // showing the restart or (start) button when done with the last question
-    endScreen(); // go to end screen afting re adding restart button
+    endScreen(); // going to end screen when we reach the end of the question index
   }
 }
 
@@ -157,14 +152,26 @@ function clearQField(element) {
   element.classList.remove('wrong')
 }
 
-function endScreen(){
+function endScreen(player_Score){
+  console.log("attempting to clear interval");
+  clearInterval(timerstart);
+  timer.textContent = "OUT OF TIME";
+  element.classList.remove('correct');
+  element.classList.remove('wrong');
   console.log("went to end screen");
-  afterTimer(); // stop timer when its not needed at end
   failScreen.classList.remove("hide"); // removing hide from score form to show it
   displayScores.classList.remove("hide");//same here as above
   questionContainerElement.classList.add("hide"); // add hide to quiz container to remove it
 
+}
 
+function saveName(e){
+  const saveButton = e.target
+  let saveNameInput = document.getElementById("saveNameInput").value;
+  if(saveButton){
+    
+    console.log(saveNameInput);
+  }
 }
 
 
@@ -185,123 +192,6 @@ const questions = [ // questions is an array with objects, question is an elemen
       {text: 'A HTML library made to make css design easier by putting a bunch of preset css elements into the html', correct: false},
       {text: 'A JS library designed to simplify HTML DOM tree traversal, aswell as event handling, CSS animation, and Ajax', correct:true},
       {text: 'A CSS library that makes design easier by adding lots of premade classes and elements and simply manipulating those', correct:false},
-    ]
-  },
-  {
-    question: 'what is 2*3?',
-    answers: [
-      {text: 'at least 4', correct: false},
-      {text: 'your mom', correct: false},
-      {text: '6', correct:true},
-      {text: '21...', correct:false},
-    ]
-  },
-  {
-    question: "what is Gary's favorite movie",
-    answers: [
-      {text: 'Star Trek', correct: false},
-      {text: 'Family Guy Movies', correct: false},
-      {text: 'StarWars franchise', correct:false},
-      {text: 'Doctor Strange', correct:true},
-    ]
-  },
-  {
-    question: 'from a famous vine quote...what are those?',
-    answers: [
-      {text: 'Chanclas', correct: true},
-      {text: "Nike Air Maxe's", correct: false},
-      {text: "Jordan Air Ones", correct:false},
-      {text: 'Crocks, in sport mode', correct:false},
-    ]
-  },
-  {
-    question: 'what is the most effecient form of sea travel?',
-    answers: [
-      {text: 'Nobody travelels the seas these days...', correct: false},
-      {text: 'Getting swallowed by a whale', correct: false},
-      {text: 'This question is dumb', correct:false},
-      {text: 'Traveling with Captain Jack Sparrow', correct:true},
-    ]
-  },
-  {
-    question: 'What is the best coding langauge, obviously un-biased',
-    answers: [
-      {text: 'Python', correct: true},
-      {text: 'HTML,CSS,JS', correct: false},
-      {text: 'C++,C#', correct:false},
-      {text: 'Ruby, Django', correct:false},
-    ]
-  },
-  {
-    question: 'If you were president what is the first thing you would HAVE to do',
-    answers: [
-      {text: 'Commit a Capitol crime, then pardon yourself', correct: false},
-      {text: 'Trash the whitehouse with a epic party', correct: true},
-      {text: 'Fill out paper work, because you just became president', correct:false},
-      {text: 'Tell your vice president your going on a 4 year vacation', correct:false},
-    ]
-  },
-  {
-    question: 'What is the most popular streaming platform',
-    answers: [
-      {text: 'HULU', correct: false},
-      {text: 'TWITCH', correct: true},
-      {text: 'NETFLIX', correct:false},
-      {text: 'YOUTUBE', correct:false},
-    ]
-  },
-  {
-    question: 'what is the best question answer?',
-    answers: [
-      {text: 'A', correct: false},
-      {text: 'B', correct: true},
-      {text: 'C', correct:false},
-      {text: 'D', correct:false},
-    ]
-  },
-  {
-    question: 'what is the most popular rythm game ever made',
-    answers: [
-      {text: 'OSU!', correct: false},
-      {text: 'Beat Saber', correct: false},
-      {text: 'Guitar Hero', correct:true},
-      {text: 'Friday Night Funkin', correct:false},
-    ]
-  },
-  {
-    question: 'what was a revolutionary 32-Bit MMO RPG game, released in 2001',
-    answers: [
-      {text: 'Minecraft', correct: false},
-      {text: 'Realm Of The Mad God', correct: false},
-      {text: 'RuneScape', correct:true},
-      {text: 'Impossible Quiz', correct:false},
-    ]
-  },
-  {
-    question: 'What company makes the best gaming periferals overall',
-    answers: [
-      {text: 'Logitech', correct: true},
-      {text: 'Glorious', correct: false},
-      {text: 'Turtle Beach', correct:false},
-      {text: 'Xbox', correct:false},
-    ]
-  },
-  {
-    question: 'What is bootstrap?',
-    answers: [
-      {text: 'A free open source css framework directed at mobile-first front end webdevelopement, containing templates, typography, buttons, navigation, and so much more', correct: true},
-      {text: 'ur mom lol', correct: false},
-      {text: 'Fortnight Battlepass', correct:false},
-      {text: 'something from Ohio', correct:false},
-    ]
-  },
-  {
-    question: 'what is 2+2?... But the second time',
-    answers: [
-      {text: '4', correct: false},
-      {text: 'bruh', correct: true},
-      {text: '239752', correct:false},
-      {text: 'at least 7', correct:false},
     ]
   },
 ]
