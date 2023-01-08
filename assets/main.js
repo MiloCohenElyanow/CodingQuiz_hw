@@ -131,8 +131,6 @@ function pickAnsw(e) { // taking e(event) in as para
   nextButton.classList.remove('hide'); // remove hide class from next button when select answer is called, or when the answer for the question is chosen.
   }
   else {
-    startButton.innerText = 'Restart?'; // when we finish the last question instead of making an entire new restart button we can just reuse the start button and simply rename the text inside to restart. and when clicked the quiz will start over again in a new order
-    startButton.classList.remove('hide'); // showing the restart or (start) button when done with the last question
     endScreen(); // going to end screen when we reach the end of the question index
   }
 }
@@ -156,6 +154,7 @@ function endScreen(player_Score){
   console.log("went to end screen");
   clearInterval(timerstart);
   timer.textContent = "OUT OF TIME";
+
   failScreen.classList.remove("hide"); // removing hide from score form to show it
   displayScores.classList.remove("hide");//same here as above
   questionContainerElement.classList.add("hide"); // add hide to quiz container to remove it
@@ -165,9 +164,12 @@ function endScreen(player_Score){
 function saveName(e){
   const saveButton = e.target
   let saveNameInput = document.getElementById("saveNameInput").value;
+  startButton.innerText = 'Restart?'; // when we finish the last question instead of making an entire new restart button we can just reuse the start button and simply rename the text inside to restart. and when clicked the quiz will start over again in a new order
+  startButton.classList.remove('hide'); // showing the restart or (start) when done with submitting information
   if(saveButton){
-    
     console.log(saveNameInput);
+    localStorage.setItem("saveNameOne", JSON.stringify(saveNameInput));
+    localStorage.setItem("saveScoreOne", JSON.stringify(currScore));
   }
 }
 

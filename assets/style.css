@@ -3,9 +3,9 @@
   font-family: 'Times New Roman', Times, serif; /*settings all fonts to times new Roman*/
 }
 :root { /*!using HSL colors!*/
-  --hue-neutral:200; /* setting hue to "neutral" which will be the neither correct nor wrong color, before a answer is selected*/
-  --hue-wrong:0; /*setting hue for wrong answers, as RED*/
-  --hue-correct:145;/*setting hue for correct answerse*/
+  --hue-neutral:73, 75%, 80%; /* setting hue to "neutral" which will be the neither correct nor wrong color, before a answer is selected*/
+  --hue-wrong:0, 80%; /*setting hue for wrong answers, as RED*/
+  --hue-correct:54;/*setting hue for correct answerse*/
 }
 
 
@@ -33,7 +33,7 @@ body.wrong{
 .container{
   width:800px; /*making height 800px at all times to scale correctly*/
   max-width:80%; /*making content 80% of page width at all times so its not touching the sides*/
-  background-color: grey;
+  background-color: rgb(53, 53, 53);
   border-radius: 5px; /*rounding edges*/
   padding: 10px;
   box-shadow: 0 0 10px 2px; /*x and y offset respectively set to 0 so its the same all around the box and blur set to 10px(how strong thr blur is) and 2px of reach.*/
@@ -75,11 +75,11 @@ body.wrong{
 
 .btn {
   --hue:var(--hue-neutral);
-  border: 1px solid hsl(var(--hue),100%, 30%); /*setting border to be a clean 1px and setting the saturation a bit lighter*/
-  background-color: hsl(var(--hue),100%, 50%); /*100%opacity and 50% saturation on the background of all the buttons in class .btn*/
+  border: 1px solid hsl(var(--hue),90%, 30%); /*setting border to be a clean 1px and setting the saturation a bit lighter*/
+  background-color: hsl(var(--hue),90%, 50%); /*100%opacity and 50% saturation on the background of all the buttons in class .btn*/
   border-radius: 5px; /*rounding edges*/
   padding: 5px 10px;
-  color:lightgray;
+  color:rgb(165, 165, 165);
   outline:none;
 }
 
