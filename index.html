@@ -15,10 +15,7 @@
   <button>
     <p class="startQButt">start quiz</p>
   </button>-->
-  <div>
-    <div id="score" >SCORE:</div>
-    <div id="scoreNum">0</div>
-  </div>
+    <div id="score" class="hide">SCORE: 0</div>
   <div id="timer" class="hide">61</div>
   <div class="container"> <!-- quizCont: quiz container to hold quiz questions and answer buttons-->
     <div id="question-container" class="hide"> <!--questCont: question(s) container, container to hold questions, comes before anything else so its the "defualt" 
@@ -35,6 +32,17 @@
     <div class="controls"> <!-- general class for buttons that control what we are doing with the page, start button starts the quiz, and next button will set next question to screen and hide previous question -->
       <button id="start-btn" class="start-btn btn">START</button> <!--start button with an id and class so we can throw a button class on and then subsequently its own style so its styled how i want the start button to be styled.-->
       <button id="next-btn" class="next-btn btn hide">NEXT</button> <!-- same thing here except we will keep it hidden until quiz quiestions are answered-->
+    </div>
+    <div id="fail-screen" class="">YOU FAILED! SAVE YOUR SCORE!!!
+      <label id="saveName"for="name">NAME/INITIALS <input type="text"></input> </label>
+      <button id="saveNameButton">Save</button>
+      
+    
+      <div id="dispScores" class="hide">
+        <h2>SCORES</h2>
+        <p>NAME/INITIALS: <span id="savedName"></span></p>
+        <p>SCORE: <span id="savedScore"></span></p>
+      </div> 
     </div>
   </div>
 

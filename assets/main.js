@@ -5,18 +5,25 @@ const questionContainerElement = document.getElementById('question-container'); 
 const questionElement = document.getElementById('question'); // initializing the question container for use as questionElement to write the questions to the html and their content from the questions array.
 const answerButtonsElement = document.getElementById('answer-buttons'); // init answer-buttons as answerButtonsElement for writing the actual text to the buttons, in this case we need to grab the container and then can 'bubble down' the answers since they both exist in chronilogical order.
 const timer = document.getElementById('timer');
+const score = document.getElementById("score");
+const saveName = document.getElementById('saveName');
+const saveNameButton = document.getElementById("saveNameButton");
+
+
+
 
 let timerInt = 5;
 
 let currScore = 0;
 
-let shuffledQuestions, currentQuestionIndex
+let shuffledQuestions, currentQuestionIndex;
+
+let l = 61;
 
 
 function timerAll(){
   var timerstart = setInterval(timerWrite, 1000); // every 1 second call timerwrite
 
-let l = 61
 function timerWrite(){
   l--; // l-- to have 61 go down by 1 every 1 second
   timer.textContent = l; // writing l to the html do display the timer number
@@ -25,7 +32,6 @@ function timerWrite(){
     clearInterval(timerstart);
     timer.textContent = "OUT OF TIME";
   }
-
 }
 }
 
@@ -66,6 +72,8 @@ function startQ(){
   currentQuestionIndex = 0; // setting index to 0 to start at the top after sorting
   questionContainerElement.classList.remove('hide'); // removing hide class from question container when user starts game
   timer.classList.remove('hide'); // removing hide element when quiz starts
+  score.classList.remove('hide');//same with score
+
   timerAll();// calling timer when we remove hide from it, kind of starting the timer when its un-hidden 
   NextQues(); // calling function setnextquestion which will set the next question to the screen from a array of objects that hold the questions and answers
 
@@ -107,9 +115,15 @@ function pickAnsw(e) { // taking e(event) in as para
   const correct = selectedButton.dataset.correct // getting the 'correct' data set that is true since it defualts to evaluating that way.
   setQType(document.body, correct); // selecting the body and telling it weather it should be set to correct or wrong.
   // need to convert the live objects and datasets into an array, and running that for and through each of the buttons
-  if (selectedButton.dataset.correct){
+  if (selectedButton.dataset.correct){ // when the correct button is chosen all the things in here happen
     currScore += 1
-    console.log("current score after correct update: ", currScore);
+    score.textContent = ("SCORE: "+ currScore);
+    l += 10; //writing 10 seconds to the timer when the answer is correct
+  }
+  else{  // when the incorrect answer is chosen subtracting 5 seconds from the timer,
+    l-= 5;
+    timer.classList.add('backgorund.wrong')
+
   }
   Array.from(answerButtonsElement.children).forEach(button => {
     setQType(button, button.dataset.correct); // setting the status of the button weather or not the status of the button is correct or not 

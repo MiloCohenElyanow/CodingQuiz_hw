@@ -41,10 +41,10 @@ body.wrong{
 }
 
 #timer{
-  width:5-px;
+  width:auto;
   height: 25px;
   background-color: grey;
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 5px;
   position: absolute;
   top: 0;
@@ -52,9 +52,19 @@ body.wrong{
   font-size: 20px;
 }
 #score{
+  background-color: grey;
+  border-radius: 2px;
+  width: auto;
+  height: 25px;
   position: absolute;
   top: 0;
   left:0;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.background-wrong{
+  background-color: red;
 }
 
 .btn-grid{
